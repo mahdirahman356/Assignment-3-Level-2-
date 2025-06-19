@@ -1,9 +1,9 @@
-import express from "express"
+import express, { Request, Response } from "express"
 import { Books } from "../models/books.model"
 
 export const booksRouter = express.Router()
 
-booksRouter.post("/", async (req, res) => {
+booksRouter.post("/", async (req: Request, res: Response) => {
     try {
         const body = req.body
         const book = await Books.create(body)
@@ -22,7 +22,7 @@ booksRouter.post("/", async (req, res) => {
     }
 })
 
-booksRouter.get("/", async (req, res) => {
+booksRouter.get("/", async (req: Request, res: Response) => {
     const booksGenre = req.query.filter
     const sortBy = req.query.sortBy
     const sort = req.query.sort
@@ -38,7 +38,7 @@ booksRouter.get("/", async (req, res) => {
     })
 })
 
-booksRouter.get("/:bookId", async (req, res) => {
+booksRouter.get("/:bookId", async (req: Request, res: Response) => {
     const bookId = req.params.bookId
     const book = await Books.findById(bookId)
 
@@ -50,7 +50,7 @@ booksRouter.get("/:bookId", async (req, res) => {
 
 })
 
-booksRouter.put("/:bookId", async (req, res) => {
+booksRouter.put("/:bookId", async (req: Request, res: Response) => {
     const bookId = req.params.bookId
     const updatedBody = req.body
 
@@ -62,7 +62,7 @@ booksRouter.put("/:bookId", async (req, res) => {
     })
 })
 
-booksRouter.delete("/:bookId", async (req, res) => {
+booksRouter.delete("/:bookId", async (req: Request, res: Response) => {
     const bookId = req.params.bookId
     const book = await Books.findByIdAndDelete(bookId)
 

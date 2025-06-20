@@ -14,7 +14,7 @@ booksRouter.post("/", async (req: Request, res: Response) => {
             data: book
         })
     } catch (error) {
-        res.status(400).json({
+        res.status(500).json({
             message: "Validation failed",
             success: false,
             error: error
@@ -24,12 +24,19 @@ booksRouter.post("/", async (req: Request, res: Response) => {
 
 booksRouter.get("/", async (req: Request, res: Response) => {
     const booksGenre = req.query.filter
-    const sortBy = req.query.sortBy
-    const sort = req.query.sort
-    const limit = req.query.limit
-    
+    const sortBy = req.query.sortBy || "createdAt"
+    const sort = req.query.sort === "asc" ? 1 : -1
+    const limit = req.query.limit || 10
 
-    const books = await Books.find()
+    const filter: any = {}
+
+    if (booksGenre) {
+        filter.genre = booksGenre.toString().toUpperCase()
+    }
+
+    const books = await Books.find(filter)
+        .sort({ [sortBy as string]: sort })
+        .limit(limit as number)
 
     res.status(200).json({
         success: true,
@@ -66,7 +73,7 @@ booksRouter.delete("/:bookId", async (req: Request, res: Response) => {
     const bookId = req.params.bookId
     const book = await Books.findByIdAndDelete(bookId)
 
-     res.status(200).json({
+    res.status(200).json({
         success: true,
         message: "Book deleted successfully",
         data: book

@@ -6,7 +6,7 @@ import { IBooks, IBooksMethods } from "../interfaces/books.interface"
 export const borrowRouter = express.Router()
 
 borrowRouter.post('/', async (req: Request, res: Response) => {
-    const body = req.body
+    const body =  req.body
 
     try {
         const book = await Books.findById(body.book)
@@ -29,7 +29,7 @@ borrowRouter.post('/', async (req: Request, res: Response) => {
             data: borrow
         });
     } catch (error) {
-        res.status(400).json({
+        res.status(500).json({
             message: "Validation failed",
             success: false,
             error: error

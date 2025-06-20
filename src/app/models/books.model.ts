@@ -51,4 +51,13 @@ booksSchema.method("updateAvailability", function (){
     return this.save()
 })
 
+booksSchema.post("save", function (doc) {
+    console.log(`Book Saved: ${doc.title}`)
+})
+
+booksSchema.pre("deleteOne", {document: true, query: false }, async function (next) {
+     console.log(`Book about to be delete ${this.title}`)
+     next()
+}) 
+
 export const Books = model("Books", booksSchema)

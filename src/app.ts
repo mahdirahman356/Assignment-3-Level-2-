@@ -1,4 +1,4 @@
-import express, { Application, json } from "express"
+import express, { Application } from "express"
 import { booksRouter } from "./app/controllers/books.controller"
 import { borrowRouter } from "./app/controllers/borrow.controller"
 

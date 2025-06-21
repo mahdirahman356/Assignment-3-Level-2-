@@ -26,8 +26,7 @@ A Library Management System built using **Express.js**, **TypeScript**, and **Mo
   - Availability control on borrow
   - Schema-level validation
   - Instance methods (`updateAvailability`)
-  - Middleware (`post('save')`) to handle data consistency
-
+  - Middleware (`post, Pre`)
 ---
 
 ## Tech Stack
@@ -39,3 +38,7 @@ A Library Management System built using **Express.js**, **TypeScript**, and **Mo
 - **Dev Tools**: ts-node-dev, dotenv
 
 ---
+
+##  Live API Link
+
+> 🔗 **[View Live API](https://assignment-3-indol-pi.vercel.app/)**  

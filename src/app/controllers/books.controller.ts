@@ -62,6 +62,9 @@ booksRouter.put("/:bookId", async (req: Request, res: Response) => {
     const updatedBody = req.body
 
     const book = await Books.findByIdAndUpdate(bookId, updatedBody, { new: true })
+    if (book) {
+        await book.updateAvailability(); // ✅ Update availability after changes
+    }
     res.status(200).json({
         success: true,
         message: "Book updated successfully",
